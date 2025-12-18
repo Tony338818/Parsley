@@ -11,7 +11,7 @@ def createToken(user_id, firstname):
     payload = {
         'user_id': user_id,
         'first_name': firstname,
-        'exp': int((datetime.datetime.utcnow() + datetime.timedelta(hours=1)).timestamp()),
+        'exp': int((datetime.datetime.now(datetime.UTC) + datetime.timedelta(hours=1)).timestamp()),
         'random_stuff': 'TheMostRandomStuffYouHaveSeen'
     }
 

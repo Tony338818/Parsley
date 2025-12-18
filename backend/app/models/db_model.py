@@ -1,6 +1,5 @@
 from sqlalchemy import String, Integer, create_engine, Column, Text, DateTime, func
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, declarative_base
 
 # create engine
 engine = create_engine('sqlite:///./app.db')

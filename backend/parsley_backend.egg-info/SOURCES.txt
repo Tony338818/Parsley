@@ -1,0 +1,16 @@
+setup.py
+app/__init__.py
+app/dependency.py
+app/main.py
+app/api/__init__.py
+app/api/router.py
+app/api/routes/__init__.py
+app/api/routes/auth.py
+app/tests/__init__.py
+app/tests/test_security.py
+app/tests/test_upload.py
+parsley_backend.egg-info/PKG-INFO
+parsley_backend.egg-info/SOURCES.txt
+parsley_backend.egg-info/dependency_links.txt
+parsley_backend.egg-info/requires.txt
+parsley_backend.egg-info/top_level.txt

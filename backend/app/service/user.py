@@ -1,7 +1,7 @@
 from ..models.db_model import User, session
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 import hashlib
-import dependency
+from app import dependency
 
 
 def password_hashing_fucntion(password):
@@ -12,7 +12,7 @@ class UserServices():
     def get_user_by_email(email):
         return session.query(User).filter_by(email = email).first()
     
-    def createUser(user: User):
+    def createUser(user):
         try:
             exists = UserServices.get_user_by_email(user.email)
 
