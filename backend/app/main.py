@@ -22,6 +22,7 @@ async def home(request: Request):
 async def upload_files(request: Request, file: UploadFile = File(...)):
     try:
         result = await up.upload_file(file)
+        # result = await up.check_file_size(file)
         if not result:
             return 'Upload Failed'
         # return 'File upload successfully'
@@ -31,20 +32,20 @@ async def upload_files(request: Request, file: UploadFile = File(...)):
 
 
 
-# if __name__ == "__main__":
-#     reg = register(
-#         firstname='Tony',
-#         lastname='John',
-#         email='tony@gmail.com',
-#         password='Password',
-#         confirmPassword='Password'
-#     )
+if __name__ == "__main__":
+    reg = register(
+        firstname='Tony',
+        lastname='John',
+        email='tony@gmail.com',
+        password='Password',
+        confirmPassword='Password'
+    )
 
-#     log = login(
-#         email='tony@gmail.com',
-#         password='Password'        
-#     )
+    log = login(
+        email='tony@gmail.com',
+        password='Password'        
+    )
 
-#     # print(UserServices.createUser(user = reg))
-#     print(UserServices.readUser(email= log.email, password=log.password))
-#     # UserServices.deleteUser('1')
+    # print(UserServices.createUser(user = reg))
+    print(UserServices.readUser(email= log.email, password=log.password))
+    # UserServices.deleteUser('1')

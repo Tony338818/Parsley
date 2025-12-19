@@ -1,22 +1,23 @@
-import PyPDF2
+import pypdf
+import pymupdf
 import docx2txt
 from pathlib import Path
 
-async def converter(file_path: str) -> str:
-    with open(file_path, 'rb') as f:
-        # get file extension
-        file_ext = Path(file_path).suffix.lower()
-        text = ''
+async def converter(filePath: str) -> str:
+    # get the file extension
+    file_ext = Path(filePath).suffix.lower()
 
-        if file_ext == '.pdf':
-            reader = PyPDF2.PdfReader(f)
-            for word in reader.pages:
-                text += word.extract_text()
-            return text
-        
-        elif file_ext in ['.docx', '.doc']:
-            reader = docx2txt.process(f)
-            return reader
-        
-        else: 
-            raise ValueError(f"Unsupported file type: {file_ext}. Only PDF and Word documents are supported.")
+    if file_ext == '.pdf':
+        text = []
+        with open(filePath, 'rb') as f:
+            # reader = pypdf.PdfReader(f)
+            reader = pymupdf.open(f)
+            for pages in reader:
+                text.append(pages.get_text())
+        return "".join(text)
+    
+    elif file_ext in ['.docx', '.doc']:
+        return docx2txt.process(filePath)
+    
+    else: 
+        raise ValueError(f"Unsupported file type: {file_ext}")

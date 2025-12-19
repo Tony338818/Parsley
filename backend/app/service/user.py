@@ -1,11 +1,19 @@
 from ..models.db_model import User, session
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 import hashlib
+import bcrypt
 from app import dependency
 
 
+# def password_hashing_fucntion(password):
+#     return hashlib.sha256(password.encode()).hexdigest()
+
 def password_hashing_fucntion(password):
-    return hashlib.sha256(password.encode()).hexdigest()
+    code = str(password).encode('utf-8')
+    salt = bcrypt.gensalt(12)
+
+    hashed_password = bcrypt.hashpw(code, salt)
+    return hashed_password
 
 class UserServices():
     @staticmethod
@@ -43,8 +51,9 @@ class UserServices():
         user = UserServices.get_user_by_email(email)
         if not user:
             return "Account doesn't exist"
-
-        if user.password != password_hashing_fucntion(password):
+        
+        p_code = str(password).encode('utf-8')
+        if not bcrypt.checkpw(p_code, user.password):
             return "Invalid password"
         
         token = dependency.createToken(user_id= user.id, firstname=user.firstname)
